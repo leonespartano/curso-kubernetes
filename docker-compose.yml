@@ -28,36 +28,36 @@ services:
     networks:
       - spring
 
-  msvc-usuarios:
-    container_name: msvc-usuarios
-    # build:
-    #   context: ./
-    #   dockerfile: ./msvc-usuarios/Dockerfile
-    image: leonespartano/usuarios:v1.1.1
-    ports:
-      - "8001:8001"
-    env_file: ./msvc-usuarios/.env
-    networks:
-      - spring
-    depends_on: 
-      - mysql8
-    restart: always
+  # msvc-usuarios:
+  #   container_name: msvc-usuarios
+  #   # build:
+  #   #   context: ./
+  #   #   dockerfile: ./msvc-usuarios/Dockerfile
+  #   image: leonespartano/usuarios:v1.1.1
+  #   ports:
+  #     - "8001:8001"
+  #   env_file: ./msvc-usuarios/.env
+  #   networks:
+  #     - spring
+  #   depends_on: 
+  #     - mysql8
+  #   restart: always
 
-  msvc-cursos:
-    container_name: msvc-cursos
-    # build:
-    #   context: ./
-    #   dockerfile: ./msvc-cursos/Dockerfile
-    image: leonespartano/cursos:v1.1.1
-    ports:
-      - "8002:8002"
-    env_file:
-      - ./msvc-cursos/.env
-    networks:
-      - spring
-    depends_on:
-      - postgres14
-    restart: always
+  # msvc-cursos:
+  #   container_name: msvc-cursos
+  #   # build:
+  #   #   context: ./
+  #   #   dockerfile: ./msvc-cursos/Dockerfile
+  #   image: leonespartano/cursos:v1.1.1
+  #   ports:
+  #     - "8002:8002"
+  #   env_file:
+  #     - ./msvc-cursos/.env
+  #   networks:
+  #     - spring
+  #   depends_on:
+  #     - postgres14
+  #   restart: always
     
 volumes:
   data-mysql:
