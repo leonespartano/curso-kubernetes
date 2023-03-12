@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msvc-usuarios
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: msvc-usuarios
+  template:
+    metadata:
+      labels:
+        app: msvc-usuarios
+    spec:
+      containers:
+      - image: leonespartano/usuarios:v1.1.2
+        name: usuarios
+        ports:
+        - containerPort: 8001
