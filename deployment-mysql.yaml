@@ -23,10 +23,9 @@ spec:
           - name: MYSQL_DATABASE
             value: msvc_usuarios
         volumeMounts:
-          - mountPath: /var/lib/mysql
-            name: data-mysql
+          - name: data-mysql
+            mountPath: /var/lib/mysql
       volumes:
         - name: data-mysql
-          hostPath:
-            path: /var/lib/mysql
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: mysql-pvc
