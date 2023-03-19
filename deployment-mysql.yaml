@@ -19,9 +19,15 @@ spec:
         - containerPort: 3306
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: sasa
+            valueFrom:
+              configMapKeyRef:
+                name: msvc-usuarios
+                key: password 
           - name: MYSQL_DATABASE
-            value: msvc_usuarios
+            valueFrom:
+              configMapKeyRef:
+                name: msvc-usuarios
+                key: database
         volumeMounts:
           - name: data-mysql
             mountPath: /var/lib/mysql

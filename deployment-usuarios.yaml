@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: msvc-usuarios
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: msvc-usuarios
@@ -18,5 +18,35 @@ spec:
         ports:
         - containerPort: 8001
         env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: msvc-usuarios
+                key: port
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: db_host
+                name: msvc-usuarios
+          - name: DB_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                key: database
+                name: msvc-usuarios
+          - name: DB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                key: username
+                name: msvc-usuarios
+          - name: DB_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                key: password
+                name: msvc-usuarios
+          - name: CURSOS_URL
+            valueFrom:
+              configMapKeyRef:
+                key: curso_url
+                name: msvc-usuarios
           - name: SPRING_PROFILES_ACTIVE
             value: kube

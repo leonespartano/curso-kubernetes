@@ -19,16 +19,34 @@ spec:
             - containerPort: 8002
           env:
             - name: PORT
-              value: "8002"
+              valueFrom:
+                configMapKeyRef:
+                  name: msvc-cursos
+                  key: port
             - name: DB_HOST
-              value: "postgres14:5432"
+              valueFrom:
+                configMapKeyRef:
+                  key: db_host
+                  name: msvc-cursos
             - name: DB_DATABASE
-              value: msvc_cursos
+              valueFrom:
+                configMapKeyRef:
+                  key: database
+                  name: msvc-cursos
             - name: DB_USERNAME
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  key: username
+                  name: msvc-cursos
             - name: DB_PASSWORD
-              value: sasa
+              valueFrom:
+                configMapKeyRef:
+                  key: password
+                  name: msvc-cursos
             - name: USUARIOS_URL
-              value: "msvc-usuarios:8001"
+              valueFrom:
+                configMapKeyRef:
+                  key: usuario_url
+                  name: msvc-cursos
             - name: SPRING_PROFILES_ACTIVE
               value: kube
