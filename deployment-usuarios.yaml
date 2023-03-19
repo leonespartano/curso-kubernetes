@@ -17,3 +17,6 @@ spec:
         name: usuarios
         ports:
         - containerPort: 8001
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: kube
