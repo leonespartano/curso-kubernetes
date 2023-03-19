@@ -20,9 +20,9 @@ spec:
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
+                key: password
                 name: msvc-usuarios
-                key: password 
           - name: MYSQL_DATABASE
             valueFrom:
               configMapKeyRef:

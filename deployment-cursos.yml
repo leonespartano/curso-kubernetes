@@ -35,12 +35,12 @@ spec:
                   name: msvc-cursos
             - name: DB_USERNAME
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: username
                   name: msvc-cursos
             - name: DB_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: password
                   name: msvc-cursos
             - name: USUARIOS_URL
