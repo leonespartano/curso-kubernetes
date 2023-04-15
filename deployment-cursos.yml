@@ -15,6 +15,7 @@ spec:
       containers:
         - name: cursos
           image: leonespartano/cursos:v1.1.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8002
           env:

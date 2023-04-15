@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: msvc-usuarios
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: msvc-usuarios
@@ -15,9 +15,18 @@ spec:
       containers:
       - image: leonespartano/usuarios:v1.1.2
         name: usuarios
+        imagePullPolicy: Always
         ports:
         - containerPort: 8001
         env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
           - name: PORT
             valueFrom:
               configMapKeyRef:
@@ -48,5 +57,5 @@ spec:
               configMapKeyRef:
                 key: curso_url
                 name: msvc-usuarios
-          - name: SPRING_PROFILES_ACTIVE
-            value: kube
+          # - name: SPRING_PROFILES_ACTIVE
+          #   value: prod

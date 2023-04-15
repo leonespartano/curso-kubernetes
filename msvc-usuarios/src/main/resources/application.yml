@@ -11,7 +11,15 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
-
+  cloud:
+    kubernetes:
+      secrets:
+        enable-api: true
+      discovery:
+        all-namespaces: true
+  profiles:
+    active: dev
+    
 logging:
   level:
     org:
@@ -20,6 +28,6 @@ logging:
   file:
     path: /app/logs
 
-msvc:
-  cursos:
-    url: ${CURSOS_URL:msvc-cursos:8002}
+#msvc:
+#  cursos:
+#    url: ${CURSOS_URL:msvc-cursos:8002}

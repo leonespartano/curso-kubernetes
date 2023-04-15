@@ -17,6 +17,13 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  cloud:
+    kubernetes:
+      secrets:
+        enable-api: true
+      discovery:
+        all-namespaces: true
+
 
 logging:
   level:
@@ -24,6 +31,6 @@ logging:
       hibernate:
         SQL: debug
 
-msvc:
-  usuarios:
-    url: ${USUARIOS_URL:msvc-usuarios:8001}
+#msvc:
+#  usuarios:
+#    url: ${USUARIOS_URL:msvc-usuarios:8001}

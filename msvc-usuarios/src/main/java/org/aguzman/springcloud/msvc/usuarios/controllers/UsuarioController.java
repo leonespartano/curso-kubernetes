@@ -5,6 +5,7 @@ import org.aguzman.springcloud.msvc.usuarios.models.entity.Usuario;
 import org.aguzman.springcloud.msvc.usuarios.services.UsuarioServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ public class UsuarioController {
 
     private final UsuarioServiceImpl service;
     private ApplicationContext context;
+    private Environment env;
 
     @GetMapping("/crash")
     public void crash(){
@@ -27,8 +29,13 @@ public class UsuarioController {
 
 
     @GetMapping("/")
-    public Map<String, List<Usuario>> listar(){
-        return Collections.singletonMap("users", service.listar());
+    public ResponseEntity<?> listar(){
+        Map<String, Object> body = new HashMap<>();
+        body.put("users", service.listar());
+        body.put("pod_info", env.getProperty("MY_POD_NAME") + ":" + env.getProperty("MY_POD_IP"));
+        body.put("texto", env.getProperty("config.texto"));
+//        return Collections.singletonMap("users", service.listar());
+        return ResponseEntity.ok(body);
     }
 
     @GetMapping("/{id}")
