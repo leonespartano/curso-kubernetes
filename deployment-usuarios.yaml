@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: msvc-usuarios
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: msvc-usuarios
@@ -57,21 +57,28 @@ spec:
               configMapKeyRef:
                 key: curso_url
                 name: msvc-usuarios
-        readinessProbe:
-          httpGet:
-            path: /actuator/health/readiness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 20
-          timeoutSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 10
-          periodSeconds: 30
-          timeoutSeconds: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /actuator/health/readiness
+        #     port: 8001
+        #     scheme: HTTP
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 20
+        #   timeoutSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /actuator/health/liveness
+        #     port: 8001
+        #     scheme: HTTP
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 30
+        #   timeoutSeconds: 10
+        # resources:
+        #   requests:
+        #     memory: "512Mi"
+        #     cpu: "500m"
+        #   limits:
+        #     memory: "800Mi"
+        #     cpu: "800m"
           # - name: SPRING_PROFILES_ACTIVE
           #   value: prod
