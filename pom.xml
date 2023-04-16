@@ -11,6 +11,7 @@
   <modules>
     <module>msvc-usuarios</module>
     <module>msvc-cursos</module>
+    <module>msvc-gateway</module>
   </modules>
 
   <name>curso-kubernetes</name>

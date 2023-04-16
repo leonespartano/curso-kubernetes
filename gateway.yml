@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msvc-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: msvc-gateway
+  template:
+    metadata:
+      labels:
+        role: msvc-gateway
+    spec:
+      containers:
+      - name: msvc-gateway
+        image: leonespartano/gateway:v1.1.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: msvc-gateway
+spec:
+  selector:
+    role: msvc-gateway
+  ports:
+  - port: 8090
+    protocol: TCP
+    targetPort: 8090
+  type: LoadBalancer
