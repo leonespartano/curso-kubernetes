@@ -93,6 +93,11 @@ public class UsuarioController {
         return ResponseEntity.ok(service.listarPorIds(ids));
     }
 
+    @GetMapping("/authorized")
+    public Map<String, Object> authorized(@RequestParam(name = "code") String code){
+        return Collections.singletonMap("code", code);
+    }
+
     private ResponseEntity<Map<String, String>> validar(BindingResult result){
         Map<String, String> errores = new HashMap<>();
         result.getFieldErrors().forEach(
