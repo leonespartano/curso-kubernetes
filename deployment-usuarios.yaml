@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: msvc-usuarios
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: msvc-usuarios
@@ -19,6 +19,16 @@ spec:
         ports:
         - containerPort: 8001
         env:
+          - name: LB_AUTH_ISSUER_URI
+            valueFrom:
+              configMapKeyRef:
+                key: lb_auth_issuer_uri
+                name: msvc-usuarios
+          - name: LB_USUARIOS_URI
+            valueFrom:
+              configMapKeyRef:
+                key: lb_usuarios_uri
+                name: msvc-usuarios
           - name: MY_POD_NAME
             valueFrom:
               fieldRef:
