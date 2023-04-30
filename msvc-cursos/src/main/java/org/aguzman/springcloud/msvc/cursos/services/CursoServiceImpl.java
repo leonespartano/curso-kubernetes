@@ -52,13 +52,13 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Curso> porIdConUsuarios(Long id) {
+    public Optional<Curso> porIdConUsuarios(Long id, String token) {
         return repository.findById(id)
                 .map(curso -> {
                             if (!curso.getCursoUsuarios().isEmpty()) {
                                 List<Long> ids = curso.getCursoUsuarios().stream()
                                         .map(CursoUsuario::getUsuarioId).toList();
-                                List<Usuario> usuarios = client.obtenerAlumnosPorCurso(ids);
+                                List<Usuario> usuarios = client.obtenerAlumnosPorCurso(ids, token);
                                 curso.setUsuarios(usuarios);
                             }
                             return curso;
@@ -68,11 +68,11 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     @Transactional
-    public Optional<Usuario> asignarUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> asignarUsuario(Usuario usuario, Long cursoId, String token) {
         return repository.findById(cursoId)
                 .map(
                         curso -> {
-                            Usuario usuarioMsvc = client.detalle(usuario.getId());
+                            Usuario usuarioMsvc = client.detalle(usuario.getId(), token);
                             CursoUsuario cursoUsuario = CursoUsuario.builder()
                                     .usuarioId(usuarioMsvc.getId())
                                     .build();
@@ -85,11 +85,11 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     @Transactional
-    public Optional<Usuario> crearUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> crearUsuario(Usuario usuario, Long cursoId, String token) {
         return repository.findById(cursoId)
                 .map(
                         curso -> {
-                            Usuario usuarioNuevoMsvc = client.crear(usuario);
+                            Usuario usuarioNuevoMsvc = client.crear(usuario, token);
                             CursoUsuario cursoUsuario = CursoUsuario.builder()
                                     .usuarioId(usuarioNuevoMsvc.getId())
                                     .build();
@@ -103,11 +103,11 @@ public class CursoServiceImpl implements CursoService {
 
     @Override
     @Transactional
-    public Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId, String token) {
         return repository.findById(cursoId)
                 .map(
                         curso -> {
-                            Usuario usuarioMsvc = client.detalle(usuario.getId());
+                            Usuario usuarioMsvc = client.detalle(usuario.getId(), token);
                             CursoUsuario cursoUsuario = CursoUsuario.builder()
                                     .usuarioId(usuarioMsvc.getId())
                                     .build();
